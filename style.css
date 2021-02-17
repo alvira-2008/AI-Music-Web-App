@@ -19,11 +19,12 @@ head{
 }
 
 canvas{
-    width: 600px; 
-    height: 500px;
-    position: absolute;
-    left: 383px; 
-    top: 163px;
+    border: 5px solid white;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px aqua;
-    border: white;
+    width: 600px; 
+    height: 450px; 
+    position: absolute; 
+    margin-top: 75px;
 }
+
