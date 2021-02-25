@@ -12,6 +12,7 @@ rightX = 0;
 rightY = 0;
 
 scoreleftWrist = 0;
+scorerightWrist = 0;
 song1_name = "About Love";
 song2_name = "Wolves";
 
@@ -35,6 +36,7 @@ function draw(){
     image(video, 0, 0, 600, 450);
 
     song1_status = song1.isPlaying();
+    song2_status = song2.isPlaying();
 
     if(scoreleftWrist>0.2)
     {
@@ -49,6 +51,15 @@ function draw(){
             document.getElementById("song").innerHTML = "Song = " + song1_name;
         }
     }
+
+    if(scorerightWrist>0.2){
+        song1.pause();
+
+        if(song2_status = false){
+            song2.play();
+            document.getElementById("song").innerHTML = "Song = " + song2_name; 
+        }
+    }
 }
     
 
@@ -61,6 +72,7 @@ function gotPoses(results){
         
         console.log(results);
         scoreleftWrist = results[0].pose.keypoints[9].score;
+        scorerightWrist = results[0].pose.keypoints[10].score;
 
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
