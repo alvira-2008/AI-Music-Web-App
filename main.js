@@ -1,5 +1,5 @@
-song = "";
-music = "";
+song1 = "";
+song2 = "";
 
 leftWristX = 0;
 leftWristY = 0;
@@ -11,10 +11,13 @@ rightWristY = 0;
 rightX = 0;
 rightY = 0;
 
+scoreleftWrist = 0;
+song1_name = "About Love";
+song2_name = "Wolves";
 
 function preload(){
-    song = loadSound("About Love.mp3");
-    music = loadSound("Wolves.mp3");
+    song1 = loadSound("AboutLove.mp3");
+    song2 = loadSound("Wolves.mp3");
 }
 
 function setup(){
@@ -30,7 +33,24 @@ function setup(){
 
 function draw(){
     image(video, 0, 0, 600, 450);
+
+    song1_status = song1.isPlaying();
+
+    if(scoreleftWrist>0.2)
+    {
+        InNumberleftWristY = Number(leftWristY);
+        remove_decimals = floor(InNumberleftWristY);
+        
+        song2.pause();
+        
+        if(song1_status = false)
+        {
+            song1.play();
+            document.getElementById("song").innerHTML = "Song = " + song1_name;
+        }
+    }
 }
+    
 
 function modelLoaded(){
     console.log('PoseNet is Initialized!');
@@ -38,7 +58,9 @@ function modelLoaded(){
 
 function gotPoses(results){
     if(results.length>0){
+        
         console.log(results);
+        scoreleftWrist = results[0].pose.keypoints[9].score;
 
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
